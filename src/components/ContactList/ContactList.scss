@@ -1,0 +1,19 @@
+@import '../ContactForm/ContactForm.scss';
+
+.contact-list {
+  margin: 0;
+
+  &__item p {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 15px;
+    margin-right: 20px;
+
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__item button {
+    @extend .form__button;
+  }
+}
