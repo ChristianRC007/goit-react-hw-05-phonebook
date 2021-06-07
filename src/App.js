@@ -3,6 +3,7 @@ import Container from './components/Container';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
+import Notification from './components/Notification';
 import { v4 as uuid } from 'uuid';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    isExist: false,
   };
 
   componentDidMount() {
@@ -29,15 +31,22 @@ class App extends Component {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
+    if (this.state.isExist !== prevState.isExist) {
+      const timer = setTimeout(() => {
+        this.setState({ isExist: false });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
   }
 
   addContact = ({ name, number }) => {
     const contact = { id: uuid(), name, number };
 
     if (this.state.contacts.find(contact => contact.name === name)) {
-      alert(`${name} is already exist!`);
+      this.setState({ isExist: true });
       return;
     }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
@@ -62,10 +71,18 @@ class App extends Component {
 
     return (
       <Container>
-        <h1>Phonebook</h1>
+        <h1 className="title">Phonebook</h1>
+        <Notification isExist={this.state.isExist} />
+
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter} />
+
+        <Filter
+          value={filter}
+          onChange={this.changeFilter}
+          isAppeared={this.state.contacts.length > 1}
+        />
+
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.deleteContact}

@@ -1,0 +1,35 @@
+.notification {
+  position: absolute;
+  top: 5%;
+  left: 20%;
+
+  padding: 20px;
+
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: rgb(224, 62, 21);
+  border-radius: 5px;
+
+  & p {
+    margin: 0;
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}

@@ -6,14 +6,74 @@
   &__item p {
     display: inline-block;
     margin-top: 0;
-    margin-bottom: 15px;
-    margin-right: 20px;
 
     font-size: 20px;
     font-weight: 500;
   }
 
   &__item button {
-    @extend .form__button;
+    display: flex;
+
+    padding: 5px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(200, 58, 33);
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    & svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
   }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+    padding: 15px;
+    width: 500px;
+
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px gray;
+
+    & p {
+      margin-bottom: 0;
+    }
+
+    &__name {
+      flex-grow: 1;
+    }
+    &__number {
+      margin-right: 60px;
+    }
+  }
+}
+
+.dub-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.dub-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.dub-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dub-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
